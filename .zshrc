@@ -5,6 +5,10 @@ if [ -f /etc/zshrc ]; then
   source /etc/zshrc
 fi
 
+if [ -f ${HOME}/.my_sh_defs ]; then
+  . ${HOME}/.my_sh_defs
+fi
+
 #################
 ## Keybindings ##
 #################
@@ -66,153 +70,17 @@ PS4='xtrace: $LINENO: '
 #####################################
 ## General Environmental Variables ##
 #####################################
-if type emacsclient > /dev/null 2>&1; then
-   export EDITOR=emacsclient-t
-   else export EDITOR=vim
-fi
-
-if type less > /dev/null 2>&1; then
-   export PAGER=less
-   else export PAGER=more
-fi
-
-# Allows Mac Homebrew to call the Github API with a higher rate limit
-export HOMEBREW_GITHUB_API_TOKEN="2296b65523e17d044e836839148344118a7f1095"
-
-export LESSOPEN=""
-export BLOCKSIZE=K
-
-set HISTORY=5000
-set HISTIGNORE="&:ls:ls *:mutt:top:w"
-unset MAILCHECK
-
-umask 22
+export HISTSIZE=5000
+# TODO: Figure out how to get the bash equivalent of HISTIGNORE
 
 #############
 ## Options ##
 #############
 setopt autocd
 setopt auto_resume
+setopt histignoredups
+setopt histignorespace
 
 # Auto-completion on
 autoload -U compinit
 compinit
-
-#############
-## Aliases ##
-#############
-alias e='$EDITOR'
-alias emacs='emacs -nw'
-alias back='cd $OLDPWD'
-alias ccs='ssh -Y dglidden@login.ccs.neu.edu'
-alias ccv='ssh dglidden@ssh.ccv.brown.edu'
-alias mv='mv -i'
-alias cp='cp -i'
-alias rm='rm -i'
-alias mkpatch="diff -urNa $1 $2"
-alias less='less -i -x4 -R -j5'
-alias le='echo $?'
-alias la='ls -A'
-alias ll='ls -l'
-alias r='/usr/bin/R --no-save'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias matrixy='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
-alias groupperm='find . -type f -exec chmod 664 {} \; ; find . -type d -exec chmod 775 {} \;'
-alias sfind='find . -type f -print | xargs grep -li'
-
-###############
-## Functions ##
-###############
-function up() {
-  oldpwd=$PWD
-  if [ -z $1 ]; then
-    cd ..
-  elif [ $1 -gt 0 ]; then
-    let count=0
-    while [ $count -lt $1 ]; do
-      cd ..
-      let count=count+1
-    done
-  else
-    echo "Argument must be a positive integer."
-  fi
-  OLDPWD=$oldpwd
-}
-
-function joinpdf() {
-  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=merged.pdf "$@"
-}
-
-# I want ls to show me dotfiles when I'm not in my ~
-function ls() {
-  if [[ $PWD == $HOME ]]; then
-    if [[ $OSTYPE == darwin* ]]; then
-      /bin/ls -G "$@"
-    elif [[ $OSTYPE == freebsd* ]]; then
-      /bin/ls -CG "$@"
-    elif [[ $OSTYPE == linux* ]]; then
-      /bin/ls -v --color=always "$@"
-    else
-      /bin/ls
-    fi
-  else
-    if [[ $OSTYPE == darwin* ]]; then
-      /bin/ls -GA "$@"
-    elif [[ $OSTYPE == freebsd* ]]; then
-      /bin/ls -CGa "$@"
-    elif [[ $OSTYPE == linux* ]]; then
-      /bin/ls -Av --color=always "$@"
-    else
-      /bin/ls
-    fi
-  fi
-}
-
-function webperm() {
-  ifs=$IFS
-  IFS=$'\n'
-  for file in `find . -type f -print` ; do
-    if [ -x "$file" ]; then
-      chmod 755 "$file"
-    else
-      chmod 644 "$file"
-    fi
-  done
-  for dir in `find . -type d -print` ; do
-    chmod 755 "$dir"
-  done
-  IFS=$ifs
-}
-
-function safeperm() {
-  ifs=$IFS
-  IFS=$'\n'
-  for file in `find . -type f -print` ; do
-    if [ -x "$file" ]; then
-      chmod 700 "$file"
-    else
-      chmod 600 "$file"
-    fi
-  done
-  for dir in `find . -type d -print` ; do
-    chmod 700 "$dir"
-  done
-  IFS=$ifs
-}
-
-function reallykill() {
-  PID=$1
-  RETVAL=0
-
-  for signal in "TERM" "INT" "HUP" "KILL"; do
-    kill -$signal $PID
-    RETVAL=$?
-    [ $RETVAL -eq 0 ] && break
-    echo "warning: kill failed: pid=$PID, signal=$signal" >&2
-    sleep 1
-  done
-
-  return $RETVAL
-}

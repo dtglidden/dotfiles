@@ -2,7 +2,7 @@
 ## General Environmental Variables ##
 #####################################
 if type emacsclient > /dev/null 2>&1; then
-  export EDITOR=emacsclient-t
+  export EDITOR="emacsclient -t"
   export ALTERNATE_EDITOR=vim
 else
   export EDITOR=vim
@@ -28,7 +28,7 @@ umask 22
 #############
 ## Aliases ##
 #############
-alias e='$EDITOR'
+alias e='eval $EDITOR 2>/dev/null || eval $ALTERNATE_EDITOR'
 alias emacs='emacs -nw'
 alias back='cd $OLDPWD'
 alias ccv='ssh dglidden@ssh.ccv.brown.edu'

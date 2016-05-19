@@ -28,7 +28,6 @@ umask 22
 #############
 ## Aliases ##
 #############
-alias e='eval $EDITOR 2>/dev/null || eval $ALTERNATE_EDITOR'
 alias emacs='emacs -nw'
 alias back='cd $OLDPWD'
 alias ccv='ssh dglidden@ssh.ccv.brown.edu'
@@ -51,6 +50,10 @@ alias rfind='grep -rlio'
 ###############
 ## Functions ##
 ###############
+function e() {
+  eval $EDITOR "$@" 2>/dev/null || $ALTERNATE_EDITOR "$@"
+}
+
 function up() {
   oldpwd=$PWD
   if [ -z $1 ]; then

@@ -13,7 +13,7 @@ fi
 ## General Environmental Variables ##
 #####################################
 export HISTORY=5000
-set HISTIGNORE="&:ls:ls *:mutt:top:w:clear:myq:myquota"
+export HISTIGNORE="&:ls:ls *:mutt:top:w:clear:myq:myquota"
 
 #############
 ## Options ##

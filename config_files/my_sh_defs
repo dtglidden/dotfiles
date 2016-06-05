@@ -25,6 +25,15 @@ unset MAILCHECK
 
 umask 22
 
+# Set up lmod if we're on the Fairbrother lab server
+if [[ $(uname -n) == "masternode" ]]; then
+  module use /home/apps/modules/all
+  module load EasyBuild
+  module load git
+  module load ruby
+  PATH=$PATH:/home/apps/software
+fi
+
 #############
 ## Aliases ##
 #############

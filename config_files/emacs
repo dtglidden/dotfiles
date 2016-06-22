@@ -60,7 +60,8 @@ Return a list of installed packages or nil for every skipped package."
 (ensure-package-installed 'evil
                           'projectile
                           'magit
-                          'org)
+                          'org
+                          'zenburn-theme)
 
 ; Give us back Ctrl+U for vim emulation
 ;(setq evil-want-C-u-scroll t)
@@ -76,3 +77,4 @@ Return a list of installed packages or nil for every skipped package."
 (evil-define-key 'normal org-mode-map (kbd "<") 'org-metaleft)
 
 (global-linum-mode)
+(load-theme 'zenburn t)

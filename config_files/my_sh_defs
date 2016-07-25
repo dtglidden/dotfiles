@@ -1,18 +1,16 @@
 #####################################
 ## General Environmental Variables ##
 #####################################
-if type emacsclient > /dev/null 2>&1; then
-  export EDITOR="emacsclient -t"
-  export ALTERNATE_EDITOR=vim
-else
-  export EDITOR=vim
-  export ALTERNATE_EDITOR=vi
-fi
-
-if type less > /dev/null 2>&1; then
-  export PAGER=less
-else
-  export PAGER=more
+# Set up lmod if we're on the Fairbrother lab server
+if [[ $(uname -n) == "masternode" ]]; then
+  module use /home/apps/modules/all
+  module load EasyBuild
+  module load git
+  module load Ruby
+  module load Emacs
+  module load ncurses
+  export PATH=$PATH:/home/apps/software
+  export PERL5LIB=${HOME}/perl5/lib/perl5
 fi
 
 # Allows Mac Homebrew to call the Github API with a higher rate limit
@@ -25,14 +23,18 @@ unset MAILCHECK
 
 umask 22
 
-# Set up lmod if we're on the Fairbrother lab server
-if [[ $(uname -n) == "masternode" ]]; then
-  module use /home/apps/modules/all
-  module load EasyBuild
-  module load git
-  module load Ruby
-  module load Emacs
-  PATH=$PATH:/home/apps/software
+if type emacsclient > /dev/null 2>&1; then
+  export EDITOR="emacsclient -t"
+  export ALTERNATE_EDITOR=vim
+else
+  export EDITOR=vim
+  export ALTERNATE_EDITOR=vi
+fi
+
+if type less > /dev/null 2>&1; then
+  export PAGER=less
+else
+  export PAGER=more
 fi
 
 #############

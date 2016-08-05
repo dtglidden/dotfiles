@@ -60,7 +60,10 @@ Return a list of installed packages or nil for every skipped package."
                           'projectile
                           'magit
                           'org
-                          'zenburn-theme)
+                          'zenburn-theme
+                          'ess
+                          'ensime
+)
 
 ; Give us back Ctrl+U for vim emulation
 ;(setq evil-want-C-u-scroll t)

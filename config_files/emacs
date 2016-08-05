@@ -1,4 +1,8 @@
 (require 'package)
+(if (not (getenv "TERM_PROGRAM"))
+  (let ((path (shell-command-to-string
+          "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
+    (setenv "PATH" path)))
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))

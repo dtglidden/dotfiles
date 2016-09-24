@@ -31,7 +31,12 @@
  '(auto-save-file-name-transforms
    `((".*" ,temporary-file-directory t)))
  '(evil-shift-width 2)
+ '(org-startup-indented t)
+ '(org-default-notes-file
+   (concat org-directory "/scratch.org"))
 )
+
+(define-key global-map "\C-cc" 'org-capture)
 
 (add-to-list 'default-frame-alist
              '(font . "Menlo-18"))

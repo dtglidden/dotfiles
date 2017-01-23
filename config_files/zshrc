@@ -62,10 +62,17 @@ function zle-line-finish () {
 ############
 ## Prompt ##
 ############
-PROMPT="%B%F{green}[%F{yellow}%D{%a %b %d}%F{green}, %F{yellow}%*%F{green}]
+if [[ "$TERM" == "dumb" ]]; then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  PS1='$ '
+else
+  PROMPT="%B%F{green}[%F{yellow}%D{%a %b %d}%F{green}, %F{yellow}%*%F{green}]
 (%F{cyan}%n%F{yellow}@%F{cyan}%m%F{green})
 %F{yellow}[%F{green}%1~%F{yellow}] %F{blue}%h %F{green}%#%f%b "
-PS4='xtrace: $LINENO: '
+  PS4='xtrace: $LINENO: '
+fi
 
 #####################################
 ## General Environmental Variables ##

@@ -27,19 +27,23 @@ complete -d cd
 ###########
 ## Prompt #
 ###########
-PS4='xtrace: $LINENO: '
-
-if ${use_color} ; then
-    if [[ ${EUID} == 0 ]] ; then
-        PS1='\[\e[1;32m\][\[\e[1;33m\]\d\[\e[1;32m\], \[\e[1;33m\]\t\[\e[1;32m\]] \n\[\e[1;34m\][\[\e[1;31m\]\h\[\e[1;34m\]] \n\[\e[1;33m\][\[\e[1;32m\]\w\[\e[1;33m\]] \[\e[1;31m\]->> \[\e[1;32m\]\$ \[\e[0m\]'
-    else
-        PS1='\[\e[1;32m\][\[\e[1;33m\]\d\[\e[1;32m\], \[\e[1;33m\]\t\[\e[1;32m\]] \n\[\e[1;32m\](\[\e[1;37m\]\u\[\e[1;33m\]@\[\e[1;37m\]\h\[\e[1;32m\]) \n\[\e[1;33m\][\[\e[1;32m\]\W\[\e[1;33m\]] \[\e[1;34m\]\# \[\e[1;32m\]\$ \[\e[0m\]'
-    fi
+if [[ "$TERM" == "dumb" ]]; then
+  PS1='$ '
 else
-    if [[ ${EUID} == 0 ]] ; then
-        # show root@ when we don't have colors
-        PS1='\u@\h \W \$ '
-    else
-        PS1='\u@\h \w \$ '
-    fi
+  PS4='xtrace: $LINENO: '
+
+  if ${use_color} ; then
+      if [[ ${EUID} == 0 ]] ; then
+          PS1='\[\e[1;32m\][\[\e[1;33m\]\d\[\e[1;32m\], \[\e[1;33m\]\t\[\e[1;32m\]] \n\[\e[1;34m\][\[\e[1;31m\]\h\[\e[1;34m\]] \n\[\e[1;33m\][\[\e[1;32m\]\w\[\e[1;33m\]] \[\e[1;31m\]->> \[\e[1;32m\]\$ \[\e[0m\]'
+      else
+          PS1='\[\e[1;32m\][\[\e[1;33m\]\d\[\e[1;32m\], \[\e[1;33m\]\t\[\e[1;32m\]] \n\[\e[1;32m\](\[\e[1;37m\]\u\[\e[1;33m\]@\[\e[1;37m\]\h\[\e[1;32m\]) \n\[\e[1;33m\][\[\e[1;32m\]\W\[\e[1;33m\]] \[\e[1;34m\]\# \[\e[1;32m\]\$ \[\e[0m\]'
+      fi
+  else
+      if [[ ${EUID} == 0 ]] ; then
+          # show root@ when we don't have colors
+          PS1='\u@\h \W \$ '
+      else
+          PS1='\u@\h \w \$ '
+      fi
+  fi
 fi

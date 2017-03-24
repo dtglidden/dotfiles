@@ -169,3 +169,10 @@ function reallykill() {
 
   return $RETVAL
 }
+
+# Print out the columns in a tab-delimited file along with their column number
+function columns() {
+  for file in "$@"; do
+    head -1 "$file" | tr $'\t' $'\n' | nl -b a
+  done
+}

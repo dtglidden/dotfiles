@@ -43,8 +43,8 @@ fi
 #############
 alias emacs='emacs -nw'
 alias back='cd $OLDPWD'
-alias ccv='ssh dglidden@ssh.ccv.brown.edu'
-alias lab='ssh dglidden@128.148.159.174'
+alias ccv='autossh -M 20004 dglidden@ccv'
+alias lab='autossh -M 20004 dglidden@lab'
 alias mv='mv -i'
 alias cp='cp -i'
 alias rm='rm -i'

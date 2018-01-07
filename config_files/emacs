@@ -51,6 +51,18 @@
   %i"))))
  '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file (concat org-directory "/scratch.org"))
+ '(org-latex-listings t)
+ '(org-latex-listings-options
+   (quote
+    (("backgroundcolor" "\\color{Apricot}")
+     ("breaklines" "true")
+     ("columns" "flexible")
+     ("basicstyle" "\\small\\ttfamily"))))
+ '(org-latex-packages-alist
+   (quote
+    (("letterpaper, margin=1in" "geometry" nil)
+     ("usenames, dvipsnames" "color" nil)
+     ("" "listings" nil))))
  '(org-startup-indented t)
  '(package-enable-at-startup nil)
  '(package-selected-packages

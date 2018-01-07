@@ -134,6 +134,7 @@ Return a list of installed packages or nil for every skipped package."
 ;(setq evil-want-C-u-scroll t)
 ; You really need C-u for other things. Suck it up and use M-v to page-up
 
+(require 'ess-julia)
 (require 'evil)
 (evil-mode t)
 ;(evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)

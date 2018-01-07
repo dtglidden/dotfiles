@@ -67,7 +67,7 @@
  '(package-enable-at-startup nil)
  '(package-selected-packages
    (quote
-    (vlf ess cider zenburn-theme projectile org minesweeper magit helm evil-visual-mark-mode ensime)))
+    (ledger-mode org-ref solidity-mode auto-complete hledger-mode vlf ess cider zenburn-theme projectile org minesweeper magit helm evil-visual-mark-mode ensime)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)

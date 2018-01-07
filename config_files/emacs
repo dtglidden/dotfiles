@@ -26,6 +26,7 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'inferior-ess-mode-hook (lambda () (setq-local show-trailing-whitespace nil)))
+(add-hook 'latex-mode-hook 'turn-on-visual-line-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -61,7 +62,8 @@
  '(show-trailing-whitespace t)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
- '(transient-mark-mode t))
+ '(transient-mark-mode t)
+ '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow))))
 
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -70,6 +72,21 @@
              '(fullscreen . maximized))
 (add-to-list 'default-frame-alist
              '(font . "Menlo-18"))
+
+;; Allows evil mode to respect visual line mode
+(defun evil-next-line--check-visual-line-mode (orig-fun &rest args)
+  (if visual-line-mode
+      (apply 'evil-next-visual-line args)
+    (apply orig-fun args)))
+
+(advice-add 'evil-next-line :around 'evil-next-line--check-visual-line-mode)
+
+(defun evil-previous-line--check-visual-line-mode (orig-fun &rest args)
+  (if visual-line-mode
+      (apply 'evil-previous-visual-line args)
+    (apply orig-fun args)))
+
+(advice-add 'evil-previous-line :around 'evil-previous-line--check-visual-line-mode)
 
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.

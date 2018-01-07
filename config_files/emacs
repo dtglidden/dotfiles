@@ -15,6 +15,13 @@
 (autoload 'pub-med "pub" "PubMed Interface for Emacs" t)
 (global-set-key (kbd "C-c p") 'pub-med)
 
+(add-to-list 'load-path "~/.emacs.d/my-packages/LilyPond/site-lisp")
+(autoload 'LilyPond-mode "lilypond-mode")
+(setq auto-mode-alist
+      (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
+
+(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
+
 (setq-default indent-tabs-mode nil)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -25,6 +32,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LilyPond-pdf-command "open")
  '(auto-save-file-name-transforms (\` ((".*" (\, temporary-file-directory) t))))
  '(backup-directory-alist (\` ((".*" \, temporary-file-directory))))
  '(column-number-mode t)

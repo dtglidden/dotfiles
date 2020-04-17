@@ -70,7 +70,7 @@ if [[ "$TERM" == "dumb" ]]; then
 else
   PROMPT="%B%F{green}[%F{yellow}%D{%a %b %d}%F{green}, %F{yellow}%*%F{green}]
 (%F{cyan}%n%F{yellow}@%F{cyan}%m%F{green})
-%F{yellow}[%F{green}%1~%F{yellow}] %F{blue}%h %F{green}%#%f%b "
+%F{yellow}[%F{green}%1~%F{yellow}] %(?.%F{green}√.%F{red}?%?) %F{green}%#%f%b "
   PS4='xtrace: $LINENO: '
 fi
 

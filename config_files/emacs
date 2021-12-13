@@ -44,6 +44,7 @@
  '(ess-style 'RStudio)
  '(ess-use-eldoc nil)
  '(evil-shift-width 2)
+ '(gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
  '(inhibit-startup-screen t)
  '(ledger-reports
    '(("ledger-report.txt" "ledger ")

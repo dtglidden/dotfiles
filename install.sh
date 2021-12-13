@@ -13,11 +13,11 @@ for file in *; do
     echo "Linking ${source_file} --> ${target_file}"
     ln -sf "${source_file}" "${target_file}"
   else
-    echo "Linking ${source_file} --> ${target_file}"
     if [ -d ${target_file} ]; then
       echo "Deleting original directory: ${target_file}"
       rm -rf ${target_file}
     fi
+    echo "Linking ${source_file} --> ${target_file}"
     ln -sf ${source_file} ${target_file}
   fi
 done

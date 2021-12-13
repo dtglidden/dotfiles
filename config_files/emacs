@@ -37,48 +37,45 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LilyPond-pdf-command "open")
- '(auto-save-file-name-transforms (\` ((".*" (\, temporary-file-directory) t))))
- '(backup-directory-alist (\` ((".*" \, temporary-file-directory))))
+ '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+ '(backup-directory-alist `((".*" \, temporary-file-directory)))
  '(column-number-mode t)
  '(ess-use-eldoc nil)
  '(evil-shift-width 2)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
- '(org-agenda-files (quote ("~/org/gtd.org")))
- '(org-babel-load-languages (quote ((R . t) (emacs-lisp . t))))
+ '(org-agenda-files '("~/org/gtd.org"))
+ '(org-babel-load-languages '((R . t) (emacs-lisp . t)))
  '(org-capture-templates
-   (quote
-    (("i" "GTD In-Basket" entry
+   '(("i" "GTD In-Basket" entry
       (file+headline "~/org/gtd.org" "In-Basket")
       "* %?
-  %i"))))
+  %i")))
  '(org-confirm-babel-evaluate nil)
  '(org-default-notes-file (concat org-directory "/scratch.org"))
  '(org-latex-listings t)
  '(org-latex-listings-options
-   (quote
-    (("backgroundcolor" "\\color{Apricot}")
+   '(("backgroundcolor" "\\color{Apricot}")
      ("breaklines" "true")
      ("columns" "flexible")
-     ("basicstyle" "\\small\\ttfamily"))))
+     ("basicstyle" "\\small\\ttfamily")))
  '(org-latex-packages-alist
-   (quote
-    (("letterpaper, margin=1in" "geometry" nil)
+   '(("letterpaper, margin=1in" "geometry" nil)
      ("usenames, dvipsnames" "color" nil)
-     ("" "listings" nil))))
+     ("" "listings" nil)))
  '(org-startup-indented t)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   (quote
-    (ledger-mode org-ref solidity-mode auto-complete hledger-mode vlf ess cider zenburn-theme projectile org minesweeper magit helm evil-visual-mark-mode ensime)))
- '(ring-bell-function (quote ignore))
+   '(org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode vlf ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
+ '(python-indent-offset 2)
+ '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(transient-mark-mode t)
- '(visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow))))
+ '(visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)))
 
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-ca" 'org-agenda)

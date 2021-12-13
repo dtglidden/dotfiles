@@ -45,6 +45,12 @@
  '(ess-use-eldoc nil)
  '(evil-shift-width 2)
  '(inhibit-startup-screen t)
+ '(ledger-reports
+   '(("ledger-report.txt" "ledger ")
+     ("bal" "%(binary) -f %(ledger-file) bal")
+     ("reg" "%(binary) -f %(ledger-file) reg")
+     ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
+     ("account" "%(binary) -f %(ledger-file) reg %(account)")))
  '(make-backup-files nil)
  '(org-agenda-files '("~/org/gtd.org"))
  '(org-babel-load-languages '((R . t) (emacs-lisp . t)))

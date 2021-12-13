@@ -141,6 +141,9 @@ Return a list of installed packages or nil for every skipped package."
 (require 'ess-view)
 (setq ess-view--spreadsheet-program "open")
 
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
 (require 'evil)
 (evil-mode t)
 ;(evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)

@@ -6,7 +6,7 @@ if [ -f /etc/zshrc ]; then
 fi
 
 if [ -f ${HOME}/.my_sh_defs ]; then
-  . ${HOME}/.my_sh_defs
+  source ${HOME}/.my_sh_defs
 fi
 
 #################

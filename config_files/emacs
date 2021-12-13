@@ -136,7 +136,6 @@ Return a list of installed packages or nil for every skipped package."
                           'zenburn-theme
                           'ess
                           'ensime
-                          'cider
 )
 
 ; Give us back Ctrl+U for vim emulation

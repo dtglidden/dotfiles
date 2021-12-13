@@ -25,3 +25,5 @@
 [branch "caching"]
 	remote = origin
 	merge = refs/heads/caching
+[url "git@github.com:"]
+	insteadOf = https://github.com/

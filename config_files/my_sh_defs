@@ -15,7 +15,9 @@ if [[ $(uname -n) == "masternode" ]]; then
 fi
 
 # Allows Mac Homebrew to call the Github API with a higher rate limit
-export HOMEBREW_GITHUB_API_TOKEN="d393294f1870fa45033231a6d93aaddabb74231a"
+if [[ $OSTYPE == darwin* ]]; then
+  . "${HOME}"/.homebrew_api
+fi
 
 export LESSOPEN=""
 export BLOCKSIZE=K

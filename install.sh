@@ -6,10 +6,18 @@ DIR=$(pwd)
 for file in *; do
   source_file=${DIR}/${file}
   target_file=${HOME}/.${file}
-  echo "Linking ${source_file} --> ${target_file}"
-  if [ -d ${target_file} ]; then
-    echo "Deleting original directory: ${target_file}"
-    rm -rf ${target_file}
+  if [[ "${file}" == "init.el" ]] ; then
+    emacsd="${HOME}"/.emacs.d
+    target_file="${emacsd}"/"${file}"
+    [ -d "${emacsd}" ] || mkdir "${emacsd}"
+    echo "Linking ${source_file} --> ${target_file}"
+    ln -sf "${source_file}" "${target_file}"
+  else
+    echo "Linking ${source_file} --> ${target_file}"
+    if [ -d ${target_file} ]; then
+      echo "Deleting original directory: ${target_file}"
+      rm -rf ${target_file}
+    fi
+    ln -sf ${source_file} ${target_file}
   fi
-  ln -sf ${source_file} ${target_file}
 done

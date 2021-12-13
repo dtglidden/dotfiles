@@ -66,6 +66,7 @@
      ("usenames, dvipsnames" "color" nil)
      ("" "listings" nil)))
  '(org-startup-indented t)
+ '(org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
    '(org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode vlf ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))

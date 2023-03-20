@@ -27,6 +27,8 @@
 (recentf-mode 1)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
+(load-file "~/.emacs.d/dtg-elfeed.el")
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'inferior-ess-mode-hook (lambda () (setq-local show-trailing-whitespace nil)))
 (add-hook 'latex-mode-hook 'turn-on-visual-line-mode)
@@ -40,6 +42,7 @@
  '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
  '(backup-directory-alist `((".*" \, temporary-file-directory)))
  '(column-number-mode t)
+ '(elfeed-search-filter "@1-week-ago +unread")
  '(ess-default-style 'RStudio)
  '(ess-style 'RStudio)
  '(ess-use-eldoc nil)
@@ -149,6 +152,18 @@ Return a list of installed packages or nil for every skipped package."
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(require 'elfeed-tube)
+(elfeed-tube-setup)
+(define-key elfeed-show-mode-map (kbd "F") 'elfeed-tube-fetch)
+(define-key elfeed-show-mode-map [remap save-buffer] 'elfeed-tube-save)
+(define-key elfeed-search-mode-map (kbd "F") 'elfeed-tube-fetch)
+(define-key elfeed-search-mode-map [remap save-buffer] 'elfeed-tube-save)
+
+(require 'elfeed-tube-mpv)
+(define-key elfeed-show-mode-map (kbd "<return>") 'elfeed-tube-mpv)
+(define-key elfeed-show-mode-map (kbd "C-c C-f") 'elfeed-tube-mpv-follow-mode)
+(define-key elfeed-show-mode-map (kbd "C-c C-w") 'elfeed-tube-mpv-where)
 
 (require 'evil)
 (evil-mode t)

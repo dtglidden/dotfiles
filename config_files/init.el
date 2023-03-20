@@ -56,7 +56,7 @@
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(ledger-file) reg %(account)")))
  '(make-backup-files nil)
- '(org-agenda-files '("~/org/gtd.org"))
+ '(org-agenda-files nil)
  '(org-babel-load-languages '((R . t) (emacs-lisp . t)))
  '(org-capture-templates
    '(("i" "GTD In-Basket" entry

@@ -98,6 +98,15 @@
 (add-to-list 'default-frame-alist
              '(font . "Menlo-18"))
 
+;; Makes sure dired ls function works properly on Mac
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired t
+        insert-directory-program "/usr/local/bin/gls"
+        dired-listing-switches "-aBhl --group-directories-first"))
+
+;; Enables a dired feature to launch native programs for selected files
+(dired-launch-enable)
+
 ;; Allows evil mode to respect visual line mode
 (defun evil-next-line--check-visual-line-mode (orig-fun &rest args)
   (if visual-line-mode

@@ -76,7 +76,7 @@
  '(org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode vlf ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
+   '(dired-launch dired-toggle-sudo noaa bbdb bbdb-vcard elfeed elfeed-tube elfeed-tube-mpv org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
  '(python-indent-offset 2)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)

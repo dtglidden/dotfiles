@@ -172,6 +172,10 @@ Return a list of installed packages or nil for every skipped package."
 (evil-define-key 'normal org-mode-map (kbd "<") 'org-metaleft)
 ;(evil-define-key 'insert ess-r-mode-map (kbd "_") #'ess-insert-assign)
 ;(evil-define-key 'insert inferior-ess-r-mode-map (kbd "_") #'ess-insert-assign)
+                                        ;
+;; SUPPOSED FIX FOR ORG-CYCLE IN NORMAL MODE
+;(evil-define-key 'normal evil-jumper-mode-map (kbd "TAB") nil)
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
 (global-linum-mode)
 (load-theme 'zenburn t)

@@ -84,7 +84,7 @@
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(show-trailing-whitespace t)
+ '(show-trailing-whitespace nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(transient-mark-mode t)

@@ -18,6 +18,7 @@ fi
 if [[ $OSTYPE == darwin* ]]; then
   . "${HOME}"/.homebrew_api
 fi
+export HOMEBREW_NO_ENV_HINTS=1
 
 export LESSOPEN=""
 export BLOCKSIZE=K

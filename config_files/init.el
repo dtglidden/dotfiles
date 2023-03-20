@@ -177,6 +177,12 @@ Return a list of installed packages or nil for every skipped package."
 ;(evil-define-key 'normal evil-jumper-mode-map (kbd "TAB") nil)
 (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
+(dolist (mode '(elfeed-search-mode
+        elfeed-show-mode
+        dired-mode
+        vterm-mode))
+  (cl-pushnew mode evil-emacs-state-modes))
+
 (global-linum-mode)
 (load-theme 'zenburn t)
 (custom-set-faces

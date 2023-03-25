@@ -6,10 +6,10 @@
 (setq exec-path (append (split-string (getenv "PATH") ":")
                         (list exec-directory)))
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
+	     '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (add-to-list 'load-path "~/.emacs.d/my-packages/PubMode/lisp")
 (autoload 'pub-med "pub" "PubMed Interface for Emacs" t)

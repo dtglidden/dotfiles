@@ -77,6 +77,9 @@
 
 (recentf-mode 1)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
+(dolist (file `(,(expand-file-name "bookmarks" user-emacs-directory)
+                ,(expand-file-name "~/.elfeed/index")))
+  (cl-pushnew file recentf-exclude))
 
 (load-file (expand-file-name "dtg-elfeed.el" user-emacs-directory))
 

@@ -45,7 +45,35 @@
   (auto-package-update-maybe)
   (auto-package-update-at-time "09:00"))
 
+;; UI
+(setq inhibit-startup-screen t)
+
+(scroll-bar-mode -1)        ; Disable visible scrollbar
+(tool-bar-mode -1)          ; Disable the toolbar
+(tooltip-mode -1)           ; Disable tooltips
+
+(menu-bar-mode -1)          ; Disable the menu bar
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                vterm-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
+;; Coding defaults
 (setq-default indent-tabs-mode nil)
+(show-paren-mode t)
+(setq show-trailing-whitespace nil)
+(transient-mark-mode t)
+(setq python-indent-offset 2)
 
 (recentf-mode 1)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
@@ -132,5 +160,4 @@
         vterm-mode))
   (cl-pushnew mode evil-emacs-state-modes))
 
-(global-linum-mode)
 (load-theme 'zenburn t)

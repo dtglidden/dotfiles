@@ -1,10 +1,11 @@
-(require 'package)
 (if (not (getenv "TERM_PROGRAM"))
   (let ((path (shell-command-to-string
           "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
     (setenv "PATH" path)))
 (setq exec-path (append (split-string (getenv "PATH") ":")
                         (list exec-directory)))
+
+(require 'package)
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -21,6 +22,20 @@
       (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
 
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
+
+
+;; Activate installed packages
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 
 (setq-default indent-tabs-mode nil)
 
@@ -79,7 +94,7 @@
  '(org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(dired-launch dired-toggle-sudo noaa bbdb bbdb-vcard elfeed elfeed-tube elfeed-tube-mpv org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
+   '(use-package dired-launch dired-toggle-sudo noaa bbdb bbdb-vcard elfeed elfeed-tube elfeed-tube-mpv org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
  '(python-indent-offset 2)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
@@ -121,35 +136,6 @@
     (apply orig-fun args)))
 
 (advice-add 'evil-previous-line :around 'evil-previous-line--check-visual-line-mode)
-
-(defun ensure-package-installed (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not.
-
-Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     (if (package-installed-p package)
-         nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-           (package-install package)
-         package)))
-   packages))
-
-;; Make sure to have downloaded archive description.
-(or (file-exists-p package-user-dir)
-  (package-refresh-contents))
-
-;; Activate installed packages
-(package-initialize)
-
-(ensure-package-installed 'evil
-                          'projectile
-                          'magit
-                          'org
-                          'zenburn-theme
-                          'ess
-                          'ensime
-)
 
 ; Give us back Ctrl+U for vim emulation
 ;(setq evil-want-C-u-scroll t)

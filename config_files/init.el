@@ -50,7 +50,7 @@
 (recentf-mode 1)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-(load-file "~/.emacs.d/dtg-elfeed.el")
+(load-file (expand-file-name "dtg-elfeed.el" user-emacs-directory))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'inferior-ess-mode-hook (lambda () (setq-local show-trailing-whitespace nil)))

@@ -7,19 +7,18 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
-	     '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(dolist (pkg '(("org" . "https://orgmode.org/elpa/")
+               ("melpa" . "https://melpa.org/packages/")
+               ("melpa-stable" . "https://stable.melpa.org/packages/")))
+  (cl-pushnew pkg package-archives))
 
-(add-to-list 'load-path "~/.emacs.d/my-packages/PubMode/lisp")
+(cl-pushnew "~/.emacs.d/my-packages/PubMode/lisp" load-path)
 (autoload 'pub-med "pub" "PubMed Interface for Emacs" t)
 (global-set-key (kbd "C-c p") 'pub-med)
 
-(add-to-list 'load-path "~/.emacs.d/my-packages/LilyPond/site-lisp")
+(cl-pushnew "~/.emacs.d/my-packages/LilyPond/site-lisp" load-path)
 (autoload 'LilyPond-mode "lilypond-mode")
-(setq auto-mode-alist
-      (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
+(cl-pushnew '("\\.ly$" . LilyPond-mode) auto-mode-alist)
 
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
 
@@ -47,7 +46,6 @@
 
 ;; UI
 (setq inhibit-startup-screen t)
-
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
@@ -93,10 +91,8 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
 
-(add-to-list 'initial-frame-alist
-             '(fullscreen . maximized))
-(add-to-list 'default-frame-alist
-             '(font . "Menlo-18"))
+(cl-pushnew '(fullscreen . maximized) initial-frame-alist)
+(cl-pushnew '(font . "Menlo-18") default-frame-alist)
 
 ;; Makes sure dired ls function works properly on Mac
 (when (string= system-type "darwin")

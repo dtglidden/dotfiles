@@ -76,7 +76,7 @@
 (setq python-indent-offset 2)
 
 (recentf-mode 1)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 (load-file (expand-file-name "dtg-elfeed.el" user-emacs-directory))
 
@@ -87,8 +87,8 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-(define-key global-map "\C-cc" 'org-capture)
-(define-key global-map "\C-ca" 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (add-to-list 'initial-frame-alist
              '(fullscreen . maximized))

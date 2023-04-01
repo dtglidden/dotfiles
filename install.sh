@@ -6,7 +6,7 @@ DIR=$(pwd)
 for file in *; do
   source_file=${DIR}/${file}
   target_file=${HOME}/.${file}
-  if [[ "${file}" == "init.el" ]] ; then
+  if [[ "${file}" =~ \.el$ ]] ; then
     emacsd="${HOME}"/.emacs.d
     target_file="${emacsd}"/"${file}"
     [ -d "${emacsd}" ] || mkdir "${emacsd}"

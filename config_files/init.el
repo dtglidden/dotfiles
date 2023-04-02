@@ -79,6 +79,14 @@
                 ,(expand-file-name "~/.elfeed/index")))
   (cl-pushnew file recentf-exclude))
 
+;; which-key setup
+(use-package which-key
+  :defer 0
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 1))
+
 (load-file (expand-file-name "dtg-elfeed.el" user-emacs-directory))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

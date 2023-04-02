@@ -43,10 +43,9 @@
  '(org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE")))
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(auto-package-update use-package dired-launch dired-toggle-sudo noaa bbdb bbdb-vcard elfeed elfeed-tube elfeed-tube-mpv org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
+   '(which-key auto-package-update use-package dired-launch dired-toggle-sudo noaa bbdb bbdb-vcard elfeed elfeed-tube elfeed-tube-mpv org-bullets vterm helpful lua-mode gnu-apl-mode ess-smart-underscore docker-compose-mode dockerfile-mode php-mode ein projectile package-utils ess-view ledger-mode org-ref auto-complete hledger-mode ess zenburn-theme minesweeper magit helm evil-visual-mark-mode ensime))
  '(ring-bell-function 'ignore)
- '(tramp-default-method "ssh")
- )
+ '(tramp-default-method "ssh"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

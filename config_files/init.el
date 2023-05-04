@@ -180,6 +180,12 @@
     "h" 'dired-up-directory
     "l" 'dired-maybe-insert-subdir))
 
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
+
 ;; Enables a dired feature to launch native programs for selected files
 (dired-launch-enable)
 

@@ -170,4 +170,9 @@
 
   (advice-add 'evil-previous-line :around 'evil-previous-line--check-visual-line-mode))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
 (load-theme 'zenburn t)

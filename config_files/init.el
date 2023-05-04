@@ -102,15 +102,6 @@
 (cl-pushnew '(fullscreen . maximized) initial-frame-alist)
 (cl-pushnew '(font . "Menlo-18") default-frame-alist)
 
-;; Makes sure dired ls function works properly on Mac
-(when (string= system-type "darwin")
-  (setq dired-use-ls-dired t
-        insert-directory-program "/usr/local/bin/gls"
-        dired-listing-switches "-aBhl --group-directories-first"))
-
-;; Enables a dired feature to launch native programs for selected files
-(dired-launch-enable)
-
 
 (require 'ess-smart-underscore)
 (require 'ess-view)
@@ -151,7 +142,6 @@
 
   (dolist (mode '(elfeed-search-mode
           elfeed-show-mode
-          dired-mode
           vterm-mode))
     (cl-pushnew mode evil-emacs-state-modes))
 
@@ -174,5 +164,23 @@
   :after evil
   :config
   (evil-collection-init))
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom ((dired-listing-switches "-aho --group-directories-first"))
+  :config
+  ;; Makes sure dired ls function works properly on Mac
+  (when (string= system-type "darwin")
+    (setq dired-use-ls-dired t
+          insert-directory-program "/usr/local/bin/gls"))
+
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-maybe-insert-subdir))
+
+;; Enables a dired feature to launch native programs for selected files
+(dired-launch-enable)
 
 (load-theme 'zenburn t)

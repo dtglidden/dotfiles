@@ -111,24 +111,6 @@
 ;; Enables a dired feature to launch native programs for selected files
 (dired-launch-enable)
 
-;; Allows evil mode to respect visual line mode
-(defun evil-next-line--check-visual-line-mode (orig-fun &rest args)
-  (if visual-line-mode
-      (apply 'evil-next-visual-line args)
-    (apply orig-fun args)))
-
-(advice-add 'evil-next-line :around 'evil-next-line--check-visual-line-mode)
-
-(defun evil-previous-line--check-visual-line-mode (orig-fun &rest args)
-  (if visual-line-mode
-      (apply 'evil-previous-visual-line args)
-    (apply orig-fun args)))
-
-(advice-add 'evil-previous-line :around 'evil-previous-line--check-visual-line-mode)
-
-; Give us back Ctrl+U for vim emulation
-;(setq evil-want-C-u-scroll t)
-; You really need C-u for other things. Suck it up and use M-v to page-up
 
 (require 'ess-smart-underscore)
 (require 'ess-view)
@@ -149,22 +131,43 @@
 (define-key elfeed-show-mode-map (kbd "C-c C-f") 'elfeed-tube-mpv-follow-mode)
 (define-key elfeed-show-mode-map (kbd "C-c C-w") 'elfeed-tube-mpv-where)
 
-(require 'evil)
-(evil-mode t)
-;(evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
-(evil-define-key 'normal org-mode-map (kbd ">") 'org-metaright)
-(evil-define-key 'normal org-mode-map (kbd "<") 'org-metaleft)
-;(evil-define-key 'insert ess-r-mode-map (kbd "_") #'ess-insert-assign)
-;(evil-define-key 'insert inferior-ess-r-mode-map (kbd "_") #'ess-insert-assign)
-                                        ;
-;; SUPPOSED FIX FOR ORG-CYCLE IN NORMAL MODE
-;(evil-define-key 'normal evil-jumper-mode-map (kbd "TAB") nil)
-(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll nil)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  ;(evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
+  (evil-define-key 'normal org-mode-map (kbd ">") 'org-metaright)
+  (evil-define-key 'normal org-mode-map (kbd "<") 'org-metaleft)
+  ;(evil-define-key 'insert ess-r-mode-map (kbd "_") #'ess-insert-assign)
+  ;(evil-define-key 'insert inferior-ess-r-mode-map (kbd "_") #'ess-insert-assign)
+                                          ;
+  ;; SUPPOSED FIX FOR ORG-CYCLE IN NORMAL MODE
+  ;(evil-define-key 'normal evil-jumper-mode-map (kbd "TAB") nil)
+  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
-(dolist (mode '(elfeed-search-mode
-        elfeed-show-mode
-        dired-mode
-        vterm-mode))
-  (cl-pushnew mode evil-emacs-state-modes))
+  (dolist (mode '(elfeed-search-mode
+          elfeed-show-mode
+          dired-mode
+          vterm-mode))
+    (cl-pushnew mode evil-emacs-state-modes))
+
+  ;; Allows evil mode to respect visual line mode
+  (defun evil-next-line--check-visual-line-mode (orig-fun &rest args)
+    (if visual-line-mode
+        (apply 'evil-next-visual-line args)
+      (apply orig-fun args)))
+
+  (advice-add 'evil-next-line :around 'evil-next-line--check-visual-line-mode)
+
+  (defun evil-previous-line--check-visual-line-mode (orig-fun &rest args)
+    (if visual-line-mode
+        (apply 'evil-previous-visual-line args)
+      (apply orig-fun args)))
+
+  (advice-add 'evil-previous-line :around 'evil-previous-line--check-visual-line-mode))
 
 (load-theme 'zenburn t)

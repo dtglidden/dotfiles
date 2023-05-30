@@ -122,6 +122,8 @@
 (define-key elfeed-show-mode-map (kbd "C-c C-f") 'elfeed-tube-mpv-follow-mode)
 (define-key elfeed-show-mode-map (kbd "C-c C-w") 'elfeed-tube-mpv-where)
 
+(define-key elfeed-search-mode-map (kbd "C-c u") 'elfeed-update)
+
 (use-package evil
   :init
   (setq evil-want-integration t)
